@@ -1,3 +1,9 @@
+---
+name: commit
+description: Commit and push staged changes with automatic message generation
+tags: [git, automation]
+---
+
 1. Read:
 !`git diff --cached`
 

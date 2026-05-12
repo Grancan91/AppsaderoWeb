@@ -19,13 +19,13 @@ services:
       timeout: 5s
       retries: 10
     networks:
-      - learnapp-net
+      - appsadero-net
 
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: learnapp-backend
+    container_name: appsadero-backend
     restart: unless-stopped
     depends_on:
       mysql:
@@ -35,9 +35,9 @@ services:
       PORT: 3000
       DB_HOST: mysql
       DB_PORT: 3306
-      DB_NAME: ${MYSQL_DATABASE:-learnapp}
-      DB_USER: ${MYSQL_USER:-learnapp}
-      DB_PASSWORD: ${MYSQL_PASSWORD:-learnapp}
+      DB_NAME: ${MYSQL_DATABASE:-appsadero}
+      DB_USER: ${MYSQL_USER:-appsadero}
+      DB_PASSWORD: ${MYSQL_PASSWORD:-appsadero}
       JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
     ports:
       - "3000:3000"
@@ -46,18 +46,18 @@ services:
       - /app/node_modules
     command: npm run dev
     networks:
-      - learnapp-net
+      - appsadero-net
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: learnapp-frontend
+    container_name: appsadero-frontend
     restart: unless-stopped
     depends_on:
       - backend
     environment:
-      VITE_API_URL: http://localhost:3000/api
+      API_URL: http://localhost:3000/api
     ports:
       - "5173:5173"
     volumes:
@@ -65,12 +65,12 @@ services:
       - /app/node_modules
     command: npm run dev -- --host 0.0.0.0
     networks:
-      - learnapp-net
+      - appsadero-net
 
 volumes:
   mysql_data:
     driver: local
 
 networks:
-  learnapp-net:
+  appsadero-net:
     driver: bridge
