@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 
 import router from './api/router/indexRouter.js'
 import db from './db.js'
+import './api/model/user.js'
 
 const app = express()
 
@@ -23,6 +24,7 @@ app.use('/api', router)
 app.listen(process.env.PORT, async () => {
   try {
     await db.authenticate()
+    await db.sync()
     console.log('DB Online.')
     console.log(`API Online: http://localhost:${process.env.PORT}`)
   } catch (error) {

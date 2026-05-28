@@ -330,6 +330,31 @@ button {
   background-color: var(--secondary-accent);
 }
 
+.btn-secondary {
+  background-color: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition:
+    background-color var(--dur-base) var(--ease-standard),
+    color var(--dur-base) var(--ease-standard),
+    border-color var(--dur-base) var(--ease-standard);
+}
+
+.btn-secondary:hover {
+  background-color: var(--accent);
+  color: var(--paper-800);
+}
+
+.btn-secondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
 /* Login page */
 .login-page {
   display: flex;
@@ -389,18 +414,6 @@ button {
 .login-form button {
   margin-top: var(--space-4);
   width: 100%;
-  background-color: var(--accent);
-  color: var(--paper-800);
-  border: none;
-  padding: var(--space-3) var(--space-5);
-  border-radius: var(--radius-lg);
-  font-weight: 600;
-  font-size: var(--text-base);
-  transition: background-color var(--dur-base) var(--ease-standard);
-}
-
-.login-form button:hover {
-  background-color: var(--secondary-accent);
 }
 
 /* Dashboard Layout */
