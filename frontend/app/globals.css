@@ -1,11 +1,28 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #ffffff;
-  --foreground: #22242b;
+  color-scheme: dark;
+
+  /* Dark theme palette */
+  --background: #1f242e;
+  --foreground: #ffffff;
   --accent: #77f8c0;
   --secondary-accent: #f187ea;
   --alternative-accent: #80a4c9;
+
+  /* Semantic color aliases for dark theme */
+  --bg-page: #1f242e;
+  --bg-inset: #2a2f38;
+  --fg-body: #e0e0e0;
+  --fg-primary: #ffffff;
+  --fg-secondary: #b0b0b0;
+  --ink-blue: #80a4c9;
+  --teal-700: #5dd9c1;
+  --teal-200: #c8f7ed;
+  --paper-800: #1f242e;
+  --ancent: #cbcb41;
+  --border-default: #3a4048;
+
   /* Focus ring — brand teal at low alpha */
   --focus-ring: 0 0 0 3px rgba(42, 111, 76, 0.28);
 
@@ -121,48 +138,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1f242e;
-    --secondary-background: #181c25;
-    --foreground: #ededed;
-  }
-} */
-
-/* body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-} */
-
-/* .paper {
-  background: var(--background);
-  color: var(--foreground);
-  padding: 1rem;
-  border-radius: 0.5rem;
-  border-width: 1px;
-  border-color: var(--accent);
-  border-style: solid;
- /*  box-shadow: 0 2px 4px rgba(var(--accent)); */
-
-/* h1 {
-  color: var(--alternative-accent);
-  margin-bottom: 0.5rem;
-} */
-
 /* --------------------------------------------------------------------------
    Semantic element styling — opinionated defaults
    -------------------------------------------------------------------------- */
 
 html {
+  color-scheme: dark;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
 body {
-  background: var(--bg-page);
-  color: var(--fg-body);
+  background-color: var(--background);
+  color: var(--foreground);
   font-family: var(--font-sans);
   font-size: var(--text-base);
   line-height: var(--leading-normal);
@@ -322,4 +311,77 @@ hr {
 
 button {
   font-family: inherit;
+  background-color: var(--accent);
+  color: var(--paper-800);
+  border: none;
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color var(--dur-base) var(--ease-standard);
+}
+
+button:hover {
+  background-color: var(--secondary-accent);
+}
+
+/* Login page */
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: var(--background);
+  padding: var(--space-6);
+}
+
+.paper {
+  background-color: var(--bg-inset);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+.login-form {
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.login-form h1 {
+  text-align: center;
+  color: var(--accent);
+  margin-bottom: var(--space-4);
+}
+
+.login-form label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  color: var(--foreground);
+  font-weight: 500;
+}
+
+.login-form input {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--background);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+
+.login-form input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.login-form button {
+  margin-top: var(--space-4);
+  width: 100%;
 }

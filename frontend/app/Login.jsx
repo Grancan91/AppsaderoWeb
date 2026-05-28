@@ -37,22 +37,34 @@ export default function Login() {
   }
 
   return (
-    <main className="login-page paper">
-      <form className="login-form" onSubmit={(e) => e.preventDefault()}>
-        <h1>Login</h1>
-        <label>
-          Usuario
-          <input type="text" name="username" placeholder="" />
-        </label>
-        <label>
-          Contraseña
-          <input type="password" name="password" placeholder="" />
-        </label>
+    <main className="login-page">
+      <div className="paper">
+        <form className="login-form" onSubmit={(e) => e.preventDefault()}>
+          <h1>Appsadero</h1>
+         {/*  <label>
+            Usuario
+            <input
+              type="text"
+              name="username"
+              placeholder="tu@email.com"
+              required
+            />
+          </label>
+          <label>
+            Contraseña
+            <input
+              type="password"
+              name="password"
+              placeholder="••••••••"
+              required
+            />
+          </label> */}
 
-        <button type="button" onClick={loginGoogle}>
-          Ingresar con Google
-        </button>
-      </form>
+          <button type="button" onClick={loginGoogle}>
+            Ingresar con Google
+          </button>
+        </form>
+      </div>
     </main>
   )
 }
