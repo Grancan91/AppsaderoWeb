@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --background: #ffffff;
@@ -6,28 +6,17 @@
   --accent: #77f8c0;
   --secondary-accent: #f187ea;
   --alternative-accent: #80a4c9;
-/* Focus ring — brand teal at low alpha */
+  /* Focus ring — brand teal at low alpha */
   --focus-ring: 0 0 0 3px rgba(42, 111, 76, 0.28);
 
   /* ---------- Typography ------------------------------------------------ */
-  --font-serif: "Source Serif 4",
-    "Source Serif Pro",
-    Georgia,
-    "Times New Roman",
-    serif;
-  --font-sans: "Inter",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Helvetica,
-    Arial,
+  --font-serif:
+    'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
+  --font-sans:
+    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
     sans-serif;
-  --font-mono: "JetBrains Mono",
-    ui-monospace,
-    "SF Mono",
-    Menlo,
-    Consolas,
-    monospace;
+  --font-mono:
+    'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
 
   /* Base size — 16px */
   --text-xs: 0.75rem;
@@ -95,15 +84,19 @@
 
   /* ---------- Shadows (soft, ink-warm, never blue) ---------------------- */
   --shadow-xs: 0 1px 0 rgba(54, 48, 31, 0.04);
-  --shadow-sm: 0 1px 2px rgba(54, 48, 31, 0.06),
-    0 1px 1px rgba(54, 48, 31, 0.04);
-  --shadow-md: 0 4px 10px -2px rgba(54, 48, 31, 0.08),
+  --shadow-sm:
+    0 1px 2px rgba(54, 48, 31, 0.06), 0 1px 1px rgba(54, 48, 31, 0.04);
+  --shadow-md:
+    0 4px 10px -2px rgba(54, 48, 31, 0.08),
     0 2px 4px -2px rgba(54, 48, 31, 0.05);
-  --shadow-lg: 0 16px 32px -8px rgba(54, 48, 31, 0.14),
+  --shadow-lg:
+    0 16px 32px -8px rgba(54, 48, 31, 0.14),
     0 6px 12px -4px rgba(54, 48, 31, 0.06);
-  --shadow-xl: 0 28px 60px -16px rgba(54, 48, 31, 0.22),
+  --shadow-xl:
+    0 28px 60px -16px rgba(54, 48, 31, 0.22),
     0 12px 24px -8px rgba(54, 48, 31, 0.08);
-  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6),
+  --shadow-inset:
+    inset 0 1px 0 rgba(255, 255, 255, 0.6),
     inset 0 -1px 0 rgba(54, 48, 31, 0.04);
 
   /* ---------- Motion ---------------------------------------------------- */
@@ -120,7 +113,6 @@
   --z-overlay: 50;
   --z-modal: 100;
 }
-
 
 @theme inline {
   --color-background: var(--background);
