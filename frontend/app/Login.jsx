@@ -7,6 +7,8 @@ import {
   signInWithPopup
 } from "firebase/auth";
 
+
+import api from "../services/api";
 import { auth } from "../services/firebase";
 
 export default function Login() {
@@ -18,7 +20,15 @@ export default function Login() {
 
       const result = await signInWithPopup(auth, provider);
 
-      console.log(result.user);
+      const idToken = await result.user.getIdToken();
+
+      // Send the ID token to the backend for verification
+      await api.post("/api/auth/login", {
+        idToken
+      }, {
+        withCredentials: true,
+      });
+
 
     } catch (error) {
       console.error(error);
@@ -26,24 +36,23 @@ export default function Login() {
   }
 
   return (
-    <main className="login-page">
+    <main className="login-page paper">
+      <form className="login-form" onSubmit={(e) => e.preventDefault()}>
+        <h1>Login</h1>
+        <label>
+          Usuario
+          <input type="text" name="username" placeholder="" />
+        </label>
+        <label>
+          Contraseña
+          <input type="password" name="password" placeholder="" />
+        </label>
 
-      <h1>Login</h1>
+        <button type="button" onClick={loginGoogle}>
+          Ingresar con Google
+        </button>
 
-      <label>
-        Usuario
-        <input type="text" name="username" placeholder="Usuario" />
-      </label>
-
-      <label>
-        Contraseña
-        <input type="password" name="password" placeholder="Contraseña" />
-      </label>
-
-      <button onClick={loginGoogle}>
-        Ingresar con Google
-      </button>
-
+      </form>
     </main>
   );
 }
