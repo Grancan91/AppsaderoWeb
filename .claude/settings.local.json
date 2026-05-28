@@ -6,7 +6,9 @@
       "Skill(update-config:*)",
       "Bash(rm /Users/abel/Projects/AppsaderoWeb/.claude/.commands/commit.md)",
       "Bash(git add *)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(npm run *)",
+      "Bash(npm install *)"
     ]
   }
 }

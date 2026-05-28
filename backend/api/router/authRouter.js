@@ -1,4 +1,6 @@
 import { Router } from "express"
+import { adminAuth } from "../controller/authController.js"
+
 const router = Router()
 
 
