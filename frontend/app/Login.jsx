@@ -1,38 +1,25 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-
-import api from '../services/api'
-import { auth } from '../services/firebase'
+import { loginGoogle } from '../lib/auth/auth_service'
 
 export default function Login() {
-  const provider = new GoogleAuthProvider()
   const router = useRouter()
+  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(false)
 
-  async function loginGoogle() {
+  const handleGoogleLogin = async () => {
+    setError(null)
+    setLoading(true)
     try {
-      // 1. Autenticar con Google en el Frontend
-      const result = await signInWithPopup(auth, provider)
-
-      // 2. Obtener el ID Token de Firebase
-      const idToken = await result.user.getIdToken()
-
-      // 3. Enviar el token a tu Backend Express
-      const response = await api.post(
-        'api/auth/login',
-        { idToken },
-        { withCredentials: true }
-      )
-
-      // 4. Si el backend responde con éxito (cookie seteada), redirigimos
-      if (response.data && response.data.success) {
-        console.log('Login correcto:', response.data.message)
-        router.push('/dashboard')
-      }
-    } catch (error) {
-      console.error('Error durante el login con Google:', error)
+      await loginGoogle()
+      router.push('/dashboard')
+    } catch (err) {
+      console.error('Error durante el login con Google:', err)
+      setError(err.response?.data?.error || 'No se pudo iniciar sesión')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -41,7 +28,7 @@ export default function Login() {
       <div className="paper">
         <form className="login-form" onSubmit={(e) => e.preventDefault()}>
           <h1>Appsadero</h1>
-         {/*  <label>
+          <label>
             Usuario
             <input
               type="text"
@@ -58,10 +45,16 @@ export default function Login() {
               placeholder="••••••••"
               required
             />
-          </label> */}
+          </label>
 
-          <button type="button" onClick={loginGoogle}>
-            Ingresar con Google
+          {error && <p className="login-error">{error}</p>}
+
+          <button
+            type="button"
+            onClick={handleGoogleLogin}
+            disabled={loading}
+          >
+            {loading ? 'Ingresando…' : 'Ingresar con Google'}
           </button>
         </form>
       </div>

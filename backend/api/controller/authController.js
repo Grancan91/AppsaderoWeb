@@ -1,20 +1,37 @@
-// Inicializa Firebase Admin en el servidor.
-// Se usa para verificar tokens y gestionar sesiones/cookies.
+import bcrypt from 'bcrypt'
+import User from '../models/User.js'
 
-import { cert, getApps, initializeApp } from 'firebase-admin/app'
+const register = async (req, res) => {
+  try {
+    const { email, password, name } = req.body
 
-import { getAuth } from 'firebase-admin/auth'
+    console.log(req.body)
 
-// Reutiliza la instancia si Next ya la creó para evitar "Firebase app already exists".
-const app =
-  getApps()[0] ||
-  initializeApp({
-    credential: cert({
-      project_id: process.env.NEXT_PUBLIC_PROJECTID,
-      client_email: process.env.NEXT_PUBLIC_FIREBASE_CLIENT_EMAIL,
-      private_key: process.env.NEXT_PUBLIC_FIREBASE_PRIVATE_KEY,
-    }),
-  })
+    // 1. comprobar si existe
+    const existingUser = await User.findOne({ where: { email } })
 
-// Auth administrativo para backend.
-export const adminAuth = getAuth(app)
+    if (existingUser) {
+      return res.status(400).json({ error: 'User already exists' })
+    }
+
+    // 2. hash password
+    const hashedPassword = await bcrypt.hash(password, 10)
+
+    // 3. crear usuario
+    const user = await User.create({
+      email,
+      password: hashedPassword,
+      name,
+    })
+
+    return res.json({
+      id: user.id,
+      email: user.email,
+      name: user.name,
+    })
+  } catch (err) {
+    return res.status(500).json({ error: 'Server error', details: err.message })
+  }
+}
+
+export default { register }
