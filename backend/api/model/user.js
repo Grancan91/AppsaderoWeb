@@ -8,15 +8,16 @@ const User = sequelize.define('User', {
     primaryKey: true,
   },
 
-  email: {
+  firebaseUid: {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true,
   },
 
-  password: {
+  email: {
     type: DataTypes.STRING,
     allowNull: false,
+    unique: true,
   },
 
   name: {

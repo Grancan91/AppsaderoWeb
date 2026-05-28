@@ -24,7 +24,7 @@ app.use('/api', router)
 app.listen(process.env.PORT, async () => {
   try {
     await db.authenticate()
-    await db.sync()
+    await db.sync({ alter: true })
     console.log('DB Online.')
     console.log(`API Online: http://localhost:${process.env.PORT}`)
   } catch (error) {

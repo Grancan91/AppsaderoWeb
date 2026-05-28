@@ -2,12 +2,13 @@
 
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { loginGoogle, signupUser } from '../lib/auth/auth_service'
+import { loginEmail, loginGoogle, signupUser } from '../lib/auth/auth_service'
 
 export default function Login() {
   const router = useRouter()
   const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+  const [pending, setPending] = useState(null)
+  const loading = pending !== null
   const [isRegister, setIsRegister] = useState(false)
   const [form, setForm] = useState({ email: '', password: '', name: '' })
 
@@ -25,33 +26,36 @@ export default function Login() {
     setIsRegister(false)
   }
 
-  const handleRegister = async () => {
+  const runAction = async (key, fn, fallbackMsg) => {
     setError(null)
-    setLoading(true)
+    setPending(key)
     try {
-      await signupUser(form.email, form.password, form.name)
+      await fn()
       router.push('/dashboard')
     } catch (err) {
-      console.error('Error durante el registro:', err)
-      setError(err.message || 'No se pudo crear la cuenta')
+      console.error(`Error en ${key}:`, err)
+      setError(err.message || fallbackMsg)
     } finally {
-      setLoading(false)
+      setPending(null)
     }
   }
 
-  const handleGoogleLogin = async () => {
-    setError(null)
-    setLoading(true)
-    try {
-      await loginGoogle()
-      router.push('/dashboard')
-    } catch (err) {
-      console.error('Error durante el login con Google:', err)
-      setError(err.response?.data?.error || 'No se pudo iniciar sesión')
-    } finally {
-      setLoading(false)
-    }
-  }
+  const handleRegister = () =>
+    runAction(
+      'register',
+      () => signupUser(form.email, form.password, form.name),
+      'No se pudo crear la cuenta'
+    )
+
+  const handleLogin = () =>
+    runAction(
+      'login',
+      () => loginEmail(form.email, form.password),
+      'No se pudo iniciar sesión'
+    )
+
+  const handleGoogleLogin = () =>
+    runAction('google', () => loginGoogle(), 'No se pudo iniciar sesión')
 
   return (
     <main className="login-page">
@@ -106,7 +110,7 @@ export default function Login() {
                 onClick={handleRegister}
                 disabled={loading}
               >
-                {loading ? 'Creando cuenta…' : 'Crear cuenta'}
+                {pending === 'register' ? 'Creando cuenta…' : 'Crear cuenta'}
               </button>
               <button
                 className="link-button"
@@ -122,10 +126,10 @@ export default function Login() {
               <button
                 className="btn-primary"
                 type="button"
-                onClick={handleGoogleLogin}
+                onClick={handleLogin}
                 disabled={loading}
               >
-                {loading ? 'Ingresando…' : 'Iniciar sesión'}
+                {pending === 'login' ? 'Ingresando…' : 'Iniciar sesión'}
               </button>
 
               <button
@@ -134,7 +138,7 @@ export default function Login() {
                 onClick={handleGoogleLogin}
                 disabled={loading}
               >
-                {loading ? 'Ingresando…' : 'Ingresar con Google'}
+                {pending === 'google' ? 'Ingresando…' : 'Ingresar con Google'}
               </button>
 
               <button
