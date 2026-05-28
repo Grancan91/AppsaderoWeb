@@ -1,4 +1,4 @@
-'use client'
+"use client"
 
 import React from 'react'
 
@@ -17,15 +17,7 @@ export default function Login() {
       const idToken = await result.user.getIdToken()
 
       // Send the ID token to the backend for verification
-      await api.post(
-        '/api/auth/login',
-        {
-          idToken,
-        },
-        {
-          withCredentials: true,
-        }
-      )
+      await api.post('/api/auth/login', { idToken }, { withCredentials: true })
     } catch (error) {
       console.error(error)
     }
