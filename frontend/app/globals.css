@@ -311,17 +311,22 @@ hr {
 
 button {
   font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-primary {
   background-color: var(--accent);
   color: var(--paper-800);
   border: none;
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-3) var(--space-5);
   border-radius: var(--radius-lg);
   font-weight: 600;
+  font-size: var(--text-base);
   cursor: pointer;
   transition: background-color var(--dur-base) var(--ease-standard);
 }
 
-button:hover {
+.btn-primary:hover {
   background-color: var(--secondary-accent);
 }
 
@@ -384,12 +389,25 @@ button:hover {
 .login-form button {
   margin-top: var(--space-4);
   width: 100%;
+  background-color: var(--accent);
+  color: var(--paper-800);
+  border: none;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: var(--text-base);
+  transition: background-color var(--dur-base) var(--ease-standard);
+}
+
+.login-form button:hover {
+  background-color: var(--secondary-accent);
 }
 
 /* Dashboard Layout */
 .dashboard-layout {
   display: flex;
-  height: 100vh;
+  flex: 1;
+  min-height: 100vh;
   background-color: var(--background);
 }
 
@@ -397,6 +415,7 @@ button:hover {
   flex: 1;
   display: flex;
   flex-direction: column;
+  min-width: 0;
   overflow: hidden;
 }
 
@@ -404,7 +423,7 @@ button:hover {
 .header {
   background-color: var(--bg-inset);
   border-bottom: 1px solid var(--border-default);
-  padding: var(--space-4) var(--space-6);
+  padding: 0 var(--space-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -426,15 +445,22 @@ button:hover {
 }
 
 .header-toggle-btn {
-  background: none;
+  background: transparent;
   border: none;
   color: var(--foreground);
   font-size: 1.5rem;
+  line-height: 1;
   cursor: pointer;
   padding: var(--space-2);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background-color var(--dur-fast) var(--ease-standard);
+}
+
+.header-toggle-btn:hover {
+  background-color: var(--background);
 }
 
 .header-right {
@@ -444,20 +470,23 @@ button:hover {
 }
 
 .header-icon-btn {
-  background: none;
+  background: transparent;
   border: none;
   color: var(--foreground);
   font-size: 1.25rem;
+  line-height: 1;
   cursor: pointer;
   padding: var(--space-2);
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color var(--dur-fast) var(--ease-standard);
+  transition: all var(--dur-fast) var(--ease-standard);
 }
 
 .header-icon-btn:hover {
   color: var(--accent);
+  background-color: var(--background);
 }
 
 .header-user {
@@ -513,7 +542,7 @@ button:hover {
 }
 
 .sidebar-header {
-  padding: var(--space-5) var(--space-4);
+  padding: 0 var(--space-4);
   border-bottom: 1px solid var(--border-default);
   display: flex;
   align-items: center;
@@ -523,16 +552,12 @@ button:hover {
 }
 
 .sidebar-logo {
-  font-weight: 600;
+  font-weight: 700;
   color: var(--accent);
-  font-size: var(--text-base);
+  font-size: var(--text-xl);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.sidebar.collapsed .sidebar-logo {
-  font-size: 1.25rem;
 }
 
 .sidebar-content {
@@ -588,5 +613,14 @@ button:hover {
 .dashboard-main {
   flex: 1;
   overflow-y: auto;
-  padding: var(--space-6);
+  padding: var(--space-7);
+  color: var(--foreground);
+}
+
+.dashboard-main h1 {
+  margin-bottom: var(--space-4);
+}
+
+.dashboard-main p {
+  margin-bottom: var(--space-4);
 }
