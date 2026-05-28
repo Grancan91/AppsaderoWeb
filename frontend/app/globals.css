@@ -385,3 +385,208 @@ button:hover {
   margin-top: var(--space-4);
   width: 100%;
 }
+
+/* Dashboard Layout */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  background-color: var(--background);
+}
+
+.dashboard-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.header {
+  background-color: var(--bg-inset);
+  border-bottom: 1px solid var(--border-default);
+  padding: var(--space-4) var(--space-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.header-logo {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+.header-toggle-btn {
+  background: none;
+  border: none;
+  color: var(--foreground);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.header-icon-btn {
+  background: none;
+  border: none;
+  color: var(--foreground);
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color var(--dur-fast) var(--ease-standard);
+}
+
+.header-icon-btn:hover {
+  color: var(--accent);
+}
+
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.header-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: var(--paper-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: var(--text-sm);
+}
+
+.header-logout {
+  background-color: transparent;
+  border: 1px solid var(--border-default);
+  color: var(--foreground);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: all var(--dur-fast) var(--ease-standard);
+}
+
+.header-logout:hover {
+  background-color: var(--accent);
+  color: var(--paper-800);
+  border-color: var(--accent);
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: var(--bg-inset);
+  border-right: 1px solid var(--border-default);
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  transition: width var(--dur-base) var(--ease-standard);
+  overflow: hidden;
+}
+
+.sidebar.collapsed {
+  width: 64px;
+}
+
+.sidebar-header {
+  padding: var(--space-5) var(--space-4);
+  border-bottom: 1px solid var(--border-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: 64px;
+}
+
+.sidebar-logo {
+  font-weight: 600;
+  color: var(--accent);
+  font-size: var(--text-base);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar.collapsed .sidebar-logo {
+  font-size: 1.25rem;
+}
+
+.sidebar-content {
+  flex: 1;
+  padding: var(--space-4) 0;
+  overflow-y: auto;
+}
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  padding: var(--space-3) var(--space-4);
+  color: var(--fg-body);
+  text-decoration: none;
+  transition: all var(--dur-fast) var(--ease-standard);
+  cursor: pointer;
+  gap: var(--space-3);
+  white-space: nowrap;
+}
+
+.sidebar-item:hover {
+  background-color: var(--background);
+  color: var(--accent);
+}
+
+.sidebar-item.active {
+  background-color: var(--background);
+  color: var(--accent);
+  border-left: 3px solid var(--accent);
+  padding-left: calc(var(--space-4) - 3px);
+}
+
+.sidebar-icon {
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  min-width: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-label {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar.collapsed .sidebar-label {
+  display: none;
+}
+
+/* Dashboard main content */
+.dashboard-main {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-6);
+}
