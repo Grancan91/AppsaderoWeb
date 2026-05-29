@@ -21,6 +21,14 @@ export default function Sidebar({ open = true }) {
           <span className="sidebar-icon">🏠</span>
           <span className="sidebar-label">Inicio</span>
         </Link>
+
+        <Link
+          href="/dashboard/perfil"
+          className={`sidebar-item ${isActive('/dashboard/perfil') ? 'active' : ''}`}
+        >
+          <span className="sidebar-icon">👤</span>
+          <span className="sidebar-label">Mi Perfil</span>
+        </Link>
       </nav>
     </aside>
   )

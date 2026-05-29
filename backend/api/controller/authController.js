@@ -31,7 +31,10 @@ export const loginGoogle = async (req, res) => {
         firebaseUid: uid,
         email,
         name: name || email,
+        provider: 'google',
       })
+    } else if (user.provider !== 'google') {
+      await user.update({ provider: 'google' })
     }
 
     await issueSessionCookie(res, idToken)
@@ -62,6 +65,7 @@ export const signup = async (req, res) => {
       firebaseUid: uid,
       email,
       name: name || decoded.name || email,
+      provider: 'email',
     })
 
     await issueSessionCookie(res, idToken)

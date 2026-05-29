@@ -637,3 +637,175 @@ button {
 .dashboard-main p {
   margin-bottom: var(--space-4);
 }
+
+/* ── Perfil de usuario ──────────────────────────────────────── */
+
+.perfil-page {
+  max-width: 580px;
+}
+
+.perfil-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--fg-secondary);
+}
+
+.perfil-title {
+  margin-bottom: var(--space-5);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+}
+
+.profile-avatar-lg {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: #0a1a14;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: var(--text-xl);
+  flex-shrink: 0;
+}
+
+.profile-name {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--fg-primary);
+  margin: 0 0 var(--space-1) 0;
+  line-height: 1.2;
+}
+
+.profile-email-meta {
+  font-size: var(--text-sm);
+  color: var(--fg-secondary);
+  margin: 0;
+}
+
+/* Cards de sección — override del padding genérico de .paper */
+.profile-section {
+  padding: var(--space-5) var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.profile-section h3 {
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--border-default);
+  margin-bottom: var(--space-1);
+}
+
+/* Label: pequeño, en mayúsculas, color secundario — claramente distinto del input */
+.profile-section label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-stamp);
+  text-transform: uppercase;
+  color: var(--fg-secondary);
+}
+
+/* Input: fondo oscuro (--background) sobre card (--bg-inset) = contraste visible */
+.profile-section input[type='text'],
+.profile-section input[type='email'],
+.profile-section input[type='password'],
+.delete-confirm-input {
+  padding: var(--space-3) var(--space-4);
+  background-color: var(--background);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
+  color: var(--fg-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  font-weight: 400;
+  letter-spacing: normal;
+  text-transform: none;
+  width: 100%;
+  transition: border-color var(--dur-fast) var(--ease-standard);
+}
+
+.profile-section input:focus,
+.delete-confirm-input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.provider-note {
+  font-size: var(--text-sm);
+  color: var(--fg-secondary);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+/* Zona peligrosa */
+.danger-zone {
+  border-color: rgba(220, 38, 38, 0.4);
+}
+
+.danger-zone h3 {
+  color: #f87171;
+  border-bottom-color: rgba(220, 38, 38, 0.2);
+}
+
+.danger-description,
+.danger-instruction {
+  font-size: var(--text-sm);
+  color: var(--fg-secondary);
+  margin: 0;
+  line-height: var(--leading-normal);
+}
+
+.danger-instruction {
+  color: var(--fg-body);
+}
+
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  background-color: transparent;
+  color: #f87171;
+  border: 1px solid #f87171;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: var(--text-base);
+  cursor: pointer;
+  transition: all var(--dur-base) var(--ease-standard);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background-color: #f87171;
+  color: #0a1a14;
+}
+
+.btn-danger:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.error-msg {
+  color: #f87171;
+  font-size: var(--text-sm);
+  margin: 0;
+}
+
+.success-msg {
+  color: var(--accent);
+  font-size: var(--text-sm);
+  margin: 0;
+}

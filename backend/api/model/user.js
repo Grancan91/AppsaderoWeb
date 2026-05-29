@@ -24,6 +24,12 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING,
     allowNull: true,
   },
+
+  provider: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue: 'email',
+  },
 })
 
 export default User

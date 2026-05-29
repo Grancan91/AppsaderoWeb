@@ -3,13 +3,14 @@
 import { useState } from 'react'
 import Header from '../components/Header'
 import Sidebar from '../components/Sidebar'
+import { UserProvider, useUser } from '../../lib/user/UserContext'
 
-export default function DashboardLayout({ children }) {
+function DashboardShell({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const { user } = useUser()
 
-  const handleToggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen)
-  }
+  const userInitial =
+    user?.name?.[0]?.toUpperCase() ?? user?.email?.[0]?.toUpperCase() ?? 'U'
 
   return (
     <div className="dashboard-layout">
@@ -17,11 +18,19 @@ export default function DashboardLayout({ children }) {
       <div className="dashboard-content">
         <Header
           sidebarOpen={sidebarOpen}
-          onToggleSidebar={handleToggleSidebar}
-          userInitial="A"
+          onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+          userInitial={userInitial}
         />
-        <main className="dashboard-main">{children}</main>
+        <main className="dashboard-main flex justify-center">{children}</main>
       </div>
     </div>
+  )
+}
+
+export default function DashboardLayout({ children }) {
+  return (
+    <UserProvider>
+      <DashboardShell>{children}</DashboardShell>
+    </UserProvider>
   )
 }

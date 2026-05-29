@@ -13,7 +13,7 @@ app.use(
   cors({
     origin: 'http://localhost:5173',
     credentials: true, // cookies/credenciales
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   })
 )
