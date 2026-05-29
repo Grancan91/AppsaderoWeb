@@ -10,7 +10,7 @@ export default function Sidebar({ open = true }) {
   return (
     <aside className={`sidebar ${!open ? 'collapsed' : ''}`}>
       <div className="sidebar-header">
-        <div className="sidebar-logo">A</div>
+        <div className="sidebar-logo">Appsadero</div>
       </div>
 
       <nav className="sidebar-content">

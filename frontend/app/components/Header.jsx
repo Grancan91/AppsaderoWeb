@@ -31,7 +31,7 @@ export default function Header({
         >
           {sidebarOpen ? '‹' : '›'}
         </button>
-        <div className="header-logo">Appsadero</div>
+        <div className="header-logo"></div>
       </div>
 
       <div className="header-right">

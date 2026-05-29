@@ -33,9 +33,10 @@ export default function PerfilPage() {
 
   return (
     <div className="perfil-page">
-      <h1 className="perfil-title">Mi perfil</h1>
-
       {/* Avatar + nombre */}
+      {/*       <h1 className="perfil-title">Mi perfil</h1>
+
+      
       <div className="profile-header">
         <div className="profile-avatar-lg">{initials}</div>
         <div>
@@ -43,6 +44,7 @@ export default function PerfilPage() {
           <p className="profile-email-meta">{user.email}</p>
         </div>
       </div>
+       */}
 
       {/* Sección 1: Información personal */}
       <section className="paper profile-section">
@@ -53,7 +55,9 @@ export default function PerfilPage() {
           <input
             type="text"
             value={infoForm.name}
-            onChange={(e) => setInfoForm((f) => ({ ...f, name: e.target.value }))}
+            onChange={(e) =>
+              setInfoForm((f) => ({ ...f, name: e.target.value }))
+            }
             placeholder="Tu nombre completo"
           />
         </label>
@@ -63,13 +67,17 @@ export default function PerfilPage() {
           <input
             type="email"
             value={infoForm.email}
-            onChange={(e) => setInfoForm((f) => ({ ...f, email: e.target.value }))}
+            onChange={(e) =>
+              setInfoForm((f) => ({ ...f, email: e.target.value }))
+            }
             placeholder="tu@correo.com"
           />
         </label>
 
         {infoStatus.error && <p className="error-msg">{infoStatus.error}</p>}
-        {infoStatus.success && <p className="success-msg">✓ Cambios guardados correctamente</p>}
+        {infoStatus.success && (
+          <p className="success-msg">✓ Cambios guardados correctamente</p>
+        )}
 
         <button
           className="btn-primary"
@@ -86,7 +94,8 @@ export default function PerfilPage() {
 
         {user.provider === 'google' ? (
           <p className="provider-note">
-            Tu cuenta está conectada con Google. Gestiona tu contraseña directamente desde tu cuenta de Google.
+            Tu cuenta está conectada con Google. Gestiona tu contraseña
+            directamente desde tu cuenta de Google.
           </p>
         ) : (
           <>
@@ -95,7 +104,9 @@ export default function PerfilPage() {
               <input
                 type="password"
                 value={pwForm.currentPassword}
-                onChange={(e) => setPwForm((f) => ({ ...f, currentPassword: e.target.value }))}
+                onChange={(e) =>
+                  setPwForm((f) => ({ ...f, currentPassword: e.target.value }))
+                }
                 placeholder="Contraseña actual"
                 autoComplete="current-password"
               />
@@ -106,7 +117,9 @@ export default function PerfilPage() {
               <input
                 type="password"
                 value={pwForm.newPassword}
-                onChange={(e) => setPwForm((f) => ({ ...f, newPassword: e.target.value }))}
+                onChange={(e) =>
+                  setPwForm((f) => ({ ...f, newPassword: e.target.value }))
+                }
                 placeholder="Mínimo 6 caracteres"
                 autoComplete="new-password"
               />
@@ -117,14 +130,20 @@ export default function PerfilPage() {
               <input
                 type="password"
                 value={pwForm.confirmPassword}
-                onChange={(e) => setPwForm((f) => ({ ...f, confirmPassword: e.target.value }))}
+                onChange={(e) =>
+                  setPwForm((f) => ({ ...f, confirmPassword: e.target.value }))
+                }
                 placeholder="Repite la nueva contraseña"
                 autoComplete="new-password"
               />
             </label>
 
             {pwStatus.error && <p className="error-msg">{pwStatus.error}</p>}
-            {pwStatus.success && <p className="success-msg">✓ Contraseña actualizada correctamente</p>}
+            {pwStatus.success && (
+              <p className="success-msg">
+                ✓ Contraseña actualizada correctamente
+              </p>
+            )}
 
             <button
               className="btn-secondary"
@@ -141,10 +160,12 @@ export default function PerfilPage() {
       <section className="paper profile-section danger-zone">
         <h3>Zona peligrosa</h3>
         <p className="danger-description">
-          Esta acción es permanente e irreversible. Se eliminará tu cuenta, tus datos y no podrás recuperarlos.
+          Esta acción es permanente e irreversible. Se eliminará tu cuenta, tus
+          datos y no podrás recuperarlos.
         </p>
         <p className="danger-instruction">
-          Para confirmar, escribe <strong>ELIMINAR</strong> en el campo de abajo:
+          Para confirmar, escribe <strong>ELIMINAR</strong> en el campo de
+          abajo:
         </p>
 
         <input
@@ -155,7 +176,9 @@ export default function PerfilPage() {
           className="delete-confirm-input"
         />
 
-        {deleteStatus.error && <p className="error-msg">{deleteStatus.error}</p>}
+        {deleteStatus.error && (
+          <p className="error-msg">{deleteStatus.error}</p>
+        )}
 
         <button
           className="btn-danger"

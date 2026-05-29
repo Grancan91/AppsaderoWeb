@@ -5,7 +5,7 @@ import cookieParser from 'cookie-parser'
 
 import router from './api/router/indexRouter.js'
 import db from './db.js'
-import './api/model/user.js'
+import './api/associations/index.js'
 
 const app = express()
 
