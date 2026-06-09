@@ -22,12 +22,23 @@ export async function createEvent(req, res) {
   try {
     const dbUser = await resolveDbUser(req.user.uid)
     const {
-      nombre, descripcion, lugar, direccion, latitud, longitud,
-      fechaHora, imagen, capacidadMaxima, privacidad, estado,
+      nombre,
+      descripcion,
+      lugar,
+      direccion,
+      latitud,
+      longitud,
+      fechaHora,
+      imagen,
+      capacidadMaxima,
+      privacidad,
+      estado,
     } = req.body
 
     if (!nombre || !lugar || !fechaHora) {
-      return res.status(400).json({ error: 'nombre, lugar y fechaHora son requeridos' })
+      return res
+        .status(400)
+        .json({ error: 'nombre, lugar y fechaHora son requeridos' })
     }
 
     const event = await Event.create({
@@ -57,7 +68,7 @@ export async function createEvent(req, res) {
   } catch (err) {
     if (err.status) return res.status(err.status).json({ error: err.error })
     console.error(err)
-    return res.status(500).json({ error: 'Error al crear el evento' })
+    return res.status(500).json({ error: 'Error al crear el evento', err })
   }
 }
 
@@ -70,15 +81,19 @@ export async function getMyEvents(req, res) {
         userId: dbUser.id,
         status: { [Op.notIn]: ['removed'] },
       },
-      include: [{
-        model: Event,
-        as: 'event',
-        include: [{ model: User, as: 'creator', attributes: ['id', 'name', 'email'] }],
-      }],
+      include: [
+        {
+          model: Event,
+          as: 'event',
+          include: [
+            { model: User, as: 'creator', attributes: ['id', 'name', 'email'] },
+          ],
+        },
+      ],
       order: [[{ model: Event, as: 'event' }, 'fechaHora', 'ASC']],
     })
 
-    const events = participations.map(p => ({
+    const events = participations.map((p) => ({
       ...p.event.toJSON(),
       myRole: p.role,
       myStatus: p.status,
@@ -98,7 +113,9 @@ export async function getEventById(req, res) {
     const { eventId } = req.params
 
     const event = await Event.findByPk(eventId, {
-      include: [{ model: User, as: 'creator', attributes: ['id', 'name', 'email'] }],
+      include: [
+        { model: User, as: 'creator', attributes: ['id', 'name', 'email'] },
+      ],
     })
 
     if (!event) return res.status(404).json({ error: 'Evento no encontrado' })
@@ -138,12 +155,23 @@ export async function updateEvent(req, res) {
 
     const organizer = await resolveOrganizer(dbUser.id, eventId)
     if (!organizer) {
-      return res.status(403).json({ error: 'No tienes permisos para editar este evento' })
+      return res
+        .status(403)
+        .json({ error: 'No tienes permisos para editar este evento' })
     }
 
     const allowedFields = [
-      'nombre', 'descripcion', 'lugar', 'direccion', 'latitud', 'longitud',
-      'fechaHora', 'imagen', 'capacidadMaxima', 'privacidad', 'estado',
+      'nombre',
+      'descripcion',
+      'lugar',
+      'direccion',
+      'latitud',
+      'longitud',
+      'fechaHora',
+      'imagen',
+      'capacidadMaxima',
+      'privacidad',
+      'estado',
     ]
     const updates = {}
     for (const field of allowedFields) {
@@ -155,7 +183,7 @@ export async function updateEvent(req, res) {
   } catch (err) {
     if (err.status) return res.status(err.status).json({ error: err.error })
     console.error(err)
-    return res.status(500).json({ error: 'Error al actualizar el evento' })
+    return res.status(500).json({ error: 'Error al actualizar el evento', err })
   }
 }
 
@@ -168,7 +196,9 @@ export async function deleteEvent(req, res) {
     if (!event) return res.status(404).json({ error: 'Evento no encontrado' })
 
     if (event.creatorId !== dbUser.id) {
-      return res.status(403).json({ error: 'Solo el creador puede eliminar el evento' })
+      return res
+        .status(403)
+        .json({ error: 'Solo el creador puede eliminar el evento' })
     }
 
     // Participants e invitations se eliminan por onDelete: CASCADE en las asociaciones

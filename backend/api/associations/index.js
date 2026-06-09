@@ -2,6 +2,7 @@ import User from '../model/user.js'
 import Event from '../model/event.js'
 import EventParticipant from '../model/eventParticipant.js'
 import Invitation from '../model/invitation.js'
+import Friend from '../model/friend.js'
 
 // User → Events creados (1:N)
 User.hasMany(Event, { foreignKey: 'creatorId', as: 'createdEvents' })
@@ -41,4 +42,10 @@ Invitation.belongsTo(Event, { foreignKey: 'eventId', as: 'event' })
 Invitation.belongsTo(User, { foreignKey: 'inviterId', as: 'inviter' })
 Invitation.belongsTo(User, { foreignKey: 'invitedUserId', as: 'invitedUser' })
 
-export { User, Event, EventParticipant, Invitation }
+// Friends
+User.hasMany(Friend, { foreignKey: 'requesterId', as: 'sentFriendRequests' })
+User.hasMany(Friend, { foreignKey: 'addresseeId', as: 'receivedFriendRequests' })
+Friend.belongsTo(User, { foreignKey: 'requesterId', as: 'requester' })
+Friend.belongsTo(User, { foreignKey: 'addresseeId', as: 'addressee' })
+
+export { User, Event, EventParticipant, Invitation, Friend }

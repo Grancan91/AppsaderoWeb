@@ -31,6 +31,14 @@ export default function Sidebar({ open = true }) {
         </Link>
 
         <Link
+          href="/dashboard/amigos"
+          className={`sidebar-item ${pathname.startsWith('/dashboard/amigos') ? 'active' : ''}`}
+        >
+          <span className="sidebar-icon">👥</span>
+          <span className="sidebar-label">Amigos</span>
+        </Link>
+
+        <Link
           href="/dashboard/perfil"
           className={`sidebar-item ${isActive('/dashboard/perfil') ? 'active' : ''}`}
         >

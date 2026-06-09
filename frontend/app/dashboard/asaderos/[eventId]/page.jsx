@@ -6,6 +6,7 @@ import { useUser } from '../../../../lib/user/UserContext.jsx'
 import { useEventDetail } from '../../../../lib/events/useEventDetail.js'
 import { useParticipants } from '../../../../lib/events/useParticipants.js'
 import { useInvitations } from '../../../../lib/events/useInvitations.js'
+import { useFriends } from '../../../../lib/friends/useFriends.js'
 import EventForm from '../../../components/events/EventForm.jsx'
 import ParticipantList from '../../../components/participants/ParticipantList.jsx'
 import InvitePanel from '../../../components/invitations/InvitePanel.jsx'
@@ -37,6 +38,10 @@ export default function EventDetailPage({ params }) {
     invitations, loading: iLoading, error: iError,
     inviteUser, inviteByEmail, createLink, revoke,
   } = useInvitations(eventId)
+  const {
+    friends, findFriendshipWith,
+    sendRequest, accept: acceptFriend, decline: declineFriend, remove: removeFriend,
+  } = useFriends()
 
   const myParticipation = participants.find(p => p.user?.id === user?.id)
   const isOrganizer = ['creator', 'co_host'].includes(myParticipation?.role)
@@ -212,6 +217,11 @@ export default function EventDetailPage({ params }) {
               currentUserId={user?.id}
               onUpdateStatus={updateStatus}
               onRemove={removeParticipant}
+              findFriendshipWith={findFriendshipWith}
+              onSendFriendRequest={sendRequest}
+              onAcceptFriendRequest={acceptFriend}
+              onDeclineFriendRequest={declineFriend}
+              onRemoveFriend={removeFriend}
             />
           </div>
         )}
@@ -226,6 +236,8 @@ export default function EventDetailPage({ params }) {
             onInviteByEmail={inviteByEmail}
             onCreateLink={createLink}
             onRevoke={revoke}
+            friends={friends}
+            myId={user?.id}
           />
         )}
       </div>

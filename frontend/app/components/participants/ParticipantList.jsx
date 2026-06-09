@@ -5,7 +5,13 @@ import EmptyState from '../ui/EmptyState.jsx'
 
 const STATUS_ORDER = { creator: 0, co_host: 1, confirmed: 2, invited: 3, pending_payment: 4, declined: 5, removed: 6 }
 
-export default function ParticipantList({ participants, loading, error, isOrganizer, currentUserId, onUpdateStatus, onRemove }) {
+export default function ParticipantList({
+  participants, loading, error, isOrganizer, currentUserId,
+  onUpdateStatus, onRemove,
+  // props opcionales de amistad
+  findFriendshipWith, onSendFriendRequest, onAcceptFriendRequest,
+  onDeclineFriendRequest, onRemoveFriend,
+}) {
   if (loading) return <LoadingSpinner message="Cargando participantes..." />
 
   if (error) return (
@@ -25,11 +31,12 @@ export default function ParticipantList({ participants, loading, error, isOrgani
   )
 
   const confirmed = sorted.filter(p => p.status === 'confirmed').length
-  const total = sorted.length
 
   return (
     <div className="flex flex-col gap-3">
-      <p className="text-xs text-[#b0b0b0]">{confirmed} confirmado{confirmed !== 1 ? 's' : ''} · {total} total</p>
+      <p className="text-xs text-[#b0b0b0]">
+        {confirmed} confirmado{confirmed !== 1 ? 's' : ''} · {sorted.length} total
+      </p>
       {sorted.map(p => (
         <ParticipantCard
           key={p.id}
@@ -38,6 +45,11 @@ export default function ParticipantList({ participants, loading, error, isOrgani
           currentUserId={currentUserId}
           onUpdateStatus={onUpdateStatus}
           onRemove={onRemove}
+          friendship={findFriendshipWith ? findFriendshipWith(p.user?.id) : null}
+          onSendFriendRequest={onSendFriendRequest}
+          onAcceptFriendRequest={onAcceptFriendRequest}
+          onDeclineFriendRequest={onDeclineFriendRequest}
+          onRemoveFriend={onRemoveFriend}
         />
       ))}
     </div>
